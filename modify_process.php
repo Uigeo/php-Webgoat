@@ -17,4 +17,5 @@ if(mysqli_query($conn, $query)){
 } else{
   echo "Error deleteing record: " . mysqli_error($conn);
 }
+
 ?>

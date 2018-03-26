@@ -2,9 +2,9 @@
   header("Progma:no-cache");
   header("Cache-Control:no-cache,must-revalidate");
   require_once("dbconfig.php");
-  $title = $_POST["title"];
-  $writer = $_POST["writer"];
-  $content = $_POST["content"];
+  $title = htmlspecialchars($_POST["title"]);
+  $writer = htmlspecialchars($_POST["writer"]);
+  $content = htmlspecialchars($_POST["content"]);
   $query = "INSERT INTO content (title, writer, content)
             VALUES ('".$title."','".$writer."','".$content."')";
   $result = mysqli_query($conn, $query);

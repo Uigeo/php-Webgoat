@@ -23,11 +23,11 @@
         $result = mysqli_query($conn, $query);
         while($row = mysqli_fetch_array($result)) {
           echo "<div class='page-header'>";
-          echo "<h1><small>Title:</small> ".$row["title"]."</h1>";
+          echo "<h1><small>Title:</small> ".htmlspecialchars($row["title"])."</h1>";
           echo "</div>";
           echo "<div class='panel panel-default'>";
-          echo "<div class='panel-heading'>Writer: ".$row["writer"]."</div>";
-          echo "<div class='panel-body'>".$row["content"]."</div>";
+          echo "<div class='panel-heading'>Writer: ".htmlspecialchars($row["writer"])."</div>";
+          echo "<div class='panel-body'>".htmlspecialchars($row["content"])."</div>";
           echo "</div>";
         }
       ?>

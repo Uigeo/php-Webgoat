@@ -105,11 +105,12 @@
                 $rows = mysqli_num_rows($result);
 
               if (($rows > $one_page_contents)) {
+                echo $rows;
                 if ($page == 1)
                   echo "<li class='disabled'><a href='#'><span>&laquo;</span></a></li>";
                 else
                   echo "<li><a href='list.php?page=".($page - 1)."'><span>&laquo;</span></a></li>";
-                for ($i = 1; $i <= (int)($rows / $one_page_contents + 1); $i++) {
+                for ($i = 1; $i <= (int)(($rows-1) / $one_page_contents + 1); $i++) {
                   if ($page == $i)
                     echo "<li class='active'><a href='list.php?page={$i}&search={$_GET['search']}&pivot={$_GET['pivot']}'>{$i}</a></li>";
                   else
