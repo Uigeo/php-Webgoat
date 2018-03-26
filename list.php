@@ -58,15 +58,38 @@
         </table>
 
         <button id="write-btn" type="button" class="btn btn-default" name="write">Write</button>
-        <form class="" action="list.php" method="get">
-          <select name="pivot">
-             <option value="title" selected="selected">title</option>
-             <option value="content">content</option>
-             <option value="writer">writer</option>
-          </select>
-          <input type="text" name="search" value="">
-          <input type="submit" name="" value="search">
+        <form class="col-md-10" action="list.php" method="get">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <select name="pivot" class="form-control">
+                 <option value="title" selected="selected">title</option>
+                 <option value="content">content</option>
+                 <option value="writer">writer</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <input type="text" name="search" value="" class="form-control">
+            </div>
+            <div class="form-group col-md-2">
+              <input type="submit" name="" value="search" class="btn btn-default">
+            </div>
+          </div>
+
+
+
+                  <!-- <select name="pivot" class="form-control">
+                     <option value="title" selected="selected">title</option>
+                     <option value="content">content</option>
+                     <option value="writer">writer</option>
+                  </select>
+              <div class="input-group col-lg-6">
+
+                  <span class="input-group-btn"><input type="submit" name="" value="search" class="btn btn-default"></span>
+              </div> -->
         </form>
+
+
+
 
 
         <div class="text-center">
@@ -101,6 +124,7 @@
           </ul>
         </div>
       </div>
+
       <script>
         $(function(){
           $("table > tbody > tr").click(function(){
