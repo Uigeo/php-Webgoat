@@ -3,7 +3,7 @@
   $id = $_GET["id"];
   $query = "SELECT * FROM content WHERE id={$id}";
   if($result = mysqli_query($conn, $query)){
-    echo "Record delete successfully";
+    //echo "Record select successfully";
     $row = mysqli_fetch_array($result);
   }else{
     echo "Error deleteing record: " . mysqli_error($conn);
@@ -16,7 +16,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="write.css">
-    <title>My board</title>
+    <title>21300267-문의거</title>
   </head>
   <body>
     <div class="container">
@@ -36,7 +36,7 @@
         <div class="form-group">
           <label class="col-md-2 control-label">Content</label>
           <div class="col-md-10">
-            <textarea class="form-control" name="content" rows="10" placeholder="Enter the content"> <?="\"{$row['content']}\"" ?> </textarea>
+            <textarea class="form-control" name="content" rows="10" placeholder="Enter the content"><?="{$row['content']}"?></textarea>
           </div>
         </div>
         <div class="form-group">

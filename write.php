@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="write.css">
-    <title>My board</title>
+    <title>21300267-문의거</title>
   </head>
   <body>
     <div class="container">
@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
           <div class="col-md-offset-2 col-md-10">
-            <button class="btn btn-default" type="submit">Write</button>
+            <button class="btn btn-default" type="submit" >Write</button>
           </div>
         </div>
       </form>

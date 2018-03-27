@@ -2,17 +2,33 @@
   header("Progma:no-cache");
   header("Cache-Control:no-cache,must-revalidate");
   require_once("dbconfig.php");
-  $title = htmlspecialchars($_POST["title"]);
-  $writer = htmlspecialchars($_POST["writer"]);
-  $content = htmlspecialchars($_POST["content"]);
-  $query = "INSERT INTO content (title, writer, content)
-            VALUES ('".$title."','".$writer."','".$content."')";
-  $result = mysqli_query($conn, $query);
-  if ($result == FALSE) {
-    echo "Failed to insert data into database<br>";
-    echo "Error: ".mysqli_error($conn);
+
+  // if(strlen(trim($_POST["title"]))==0){
+  //   header("Location: list.php");
+  // }
+  if (strlen(str_replace(" ","",$_POST["title"]))!=0) {
+
+    $stmt = $conn->prepare("INSERT INTO content (title, writer, content) VALUES (?,?,?)");
+    $stmt->bind_param("sss", $title, $writer, $content);
+
+    $title = htmlspecialchars($_POST["title"]);
+    $writer = htmlspecialchars($_POST["writer"]);
+    $content = htmlspecialchars($_POST["content"]);
+
+    $stmt->execute();
+
+    //$result = mysqli_query($conn, $query);
+
+    $stmt->close();
+    $conn->close();
+
+
+
   }
-  else {
-    header("Location: list.php");
-  }
+
+  header("Location: list.php");
+  // $query = "INSERT INTO content (title, writer, content)
+  //           VALUES ('".$title."','".$writer."','".$content."')";
+
+
 ?>
