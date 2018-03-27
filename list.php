@@ -50,8 +50,7 @@
                   $stmt = $conn->prepare("SELECT id, title, writer, write_date FROM content WHERE deleted=0 AND {$pivot} LIKE '%{$search}%' LIMIT {$cur_page_contents} , {$one_page_contents}");
 
                 }
-                //
-                //echo $query;
+
                 if (!$stmt->execute()) {
                      echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                 }
@@ -70,7 +69,7 @@
             </tbody>
         </table>
 
-        <button id="backup-btn" type="button" class="btn btn-default" name="backup">backup del</button>
+
         <button id="write-btn" type="button" class="btn btn-default" name="write">Write</button>
         <form class="col-md-10" id="form-search" action="list.php" method="get" onsubmit="">
           <div class="form-row">
@@ -142,6 +141,10 @@
 
       <script>
 
+          function trim(stringToTrim) {
+            return stringToTrim.replace(/^\s+|\s+$/g,"");
+          }
+
         $(function(){
           $("table > tbody > tr").click(function(){
             var id = $(this).find("td").eq(0).text();
@@ -154,19 +157,15 @@
             location.href = "write.php";
         });
 
-        $("#backup-btn").click(function() {
-            var backup = confirm('Are you sure you want to delete backup?');
-            if (backup) {
-              location.href = "backup_process.php";
-            }
-        });
+
 
         $("#form-search").submit(function(e) {
-          if(document.getElementById('text-search').value.length < 2){
+          if(trim(document.getElementById('text-search').value).length < 2){
             alert("You have to type more than 2 characters!");
             e.preventDefault();
           }
         });
+
 
         $.urlParam = function(name){
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);

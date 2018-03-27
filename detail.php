@@ -4,7 +4,7 @@
   $query = "SELECT deleted FROM content WHERE id = {$id}";
   $result = mysqli_query($conn, $query);
   if (!$row = mysqli_fetch_array($result)) {
-    echo "<body> <script> alert('Content dose not exited.'); window.location.href = 'list.php';</script> </body>";
+    echo "<body> <script> alert('content does not exited.'); window.location.href = 'list.php';</script> </body>";
   }
   elseif($id == NULL){
     echo "<body> <script> alert('This is not the right access.'); window.location.href = 'list.php'; </script> </body>";
@@ -34,13 +34,14 @@
           echo "</div>";
           echo "<div class='panel panel-default'>";
           echo "<div class='panel-heading'>Writer: ".$row["writer"]."</div>";
-          echo "<div class='panel-body'>".$row["content"]."</div>";
+          echo "<div class='panel-body'>".nl2br($row["content"])."</div>";
           echo "</div>";
         }
       ?>
       <button class="btn btn-default" id="list-btn" type="button">List</button>
-      <button class="btn btn-default" id="delete-btn" type="button">Delete</button>
       <button class="btn btn-default" id="modify-btn" type="button">Modify</button>
+      <button class="btn btn-default" id="delete-btn" type="button">Delete</button>
+      <button id="backup-btn" type="button" class="btn btn-default" name="backup">backup del</button>
       <?php include 'footer.html' ?>
     </div>
     <script>
@@ -53,12 +54,19 @@
       $("#list-btn").click(function() {
         location.href="list.php";
       });
-      
+
       $("#delete-btn").click(function() {
         var check = confirm('Are you sure you want to delete this item?');
         if(check){
           location.href="delete_process.php?id="+ $.urlParam('id');
         }
+      });
+
+      $("#backup-btn").click(function() {
+          var backup = confirm('Are you sure you want to delete backup?');
+          if (backup) {
+            location.href = "backup_process.php?id="+ $.urlParam('id');
+          }
       });
 
       $("#modify-btn").click(function() {
