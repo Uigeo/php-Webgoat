@@ -1,4 +1,19 @@
-
+<?php 
+  require_once('dbconfig_user.php');
+  $email = $_COOKIE['email'];
+  echo $email;
+  $pw = $_COOKIE['pw'];
+  echo $pw;
+  $auth = false;
+  $auth_query = "SELECT * FROM users WHERE email='{$email}' AND pw='{$pw}'";
+  $result = mysqli_query($conn, $auth_query);
+  if(mysqli_num_rows($result) > 0){
+    $auth= true;
+  }else{
+    $auth= false;
+  }
+  echo $auth;
+?>
 
 <!DOCTYPE html>
 <html>
@@ -12,28 +27,45 @@
   </head>
   <body>
 
-  <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">PHP WEB GOAT</h1>
-    <p class="lead">php Version web goat</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-3">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-xss" aria-selected="true">XSS</a>
-      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-sqlinjection" aria-selected="false">SQL Injection</a>
-      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Others</a>
-    </div>
-  </div>
-  <div class="col-9">
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-xss-tab"> <?php include './XSS/list.php?num_el=10'?> </div>
-      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-sqlinjection-tab">...</div>
-      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-    </div>
-  </div>
-</div>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Webgoat php</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/phpwebgoat/main.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <?php 
+                if($auth == false) {
+                  echo "<a class='nav-link' href='/phpwebgoat/login.php'>Login</a>";
+                }else{
+                  echo "<a class='nav-link' href='/phpwebgoat/logout.php'>Logout</a>";
+                } 
+              ?>
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-md-0">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+          </form>
+        </div>
+      </nav>
+
   
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
